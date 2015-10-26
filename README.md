@@ -8,6 +8,8 @@ Color starts out at Blue (when at Min GPU Fan speed) and fades to Red (when at M
 3. Run OpenHardwareMonitor (http://openhardwaremonitor.org/). This creates a WMI object that we need to get sensor information.
 4. Run the Powershell script as Administrator. 
 
+Requires: FastLED Library for the Teensy/Arduino https://github.com/FastLED/FastLED
+
 Change $VerbosePreference = 'SilentlyContinue' to $VerbosePreference = 'Continue' for values to print to console. 
 
 DEMO: https://www.youtube.com/watch?v=0GmOBLFoybo
