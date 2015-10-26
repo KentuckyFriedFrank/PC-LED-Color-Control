@@ -1,5 +1,5 @@
 ﻿#Change to continue to ahve values printed to console
-$VerbosePreference = 'SilentlyContinue'
+$VerbosePreference = 'Continue'
 
 $ErrorActionPreference = 'Stop'
 
@@ -66,7 +66,7 @@ $previousLEDData = New-Object Byte[] ($NumLEDs*3)
 $pixel = New-Object Byte[] 3
 $COMs = [System.IO.Ports.SerialPort]::getportnames()
 Write-Verbose  ($COMs | Out-String)
-if(!($port)){
+if(!($port.IsOpen)){
     $COM = 'COM5'
     $Port = New-Object System.IO.Ports.SerialPort $COM,9600,None,8,one
     $port.open()
@@ -101,11 +101,12 @@ do{
         Write-Verbose ('LEDvalue '+ $LEDvalue | Out-String)       
         Cool-To-Hot $LEDvalue 
 
-        
+        <#
         If(!(Compare-Object $LEDData $previousLEDData)){
             
         }
         Else{
+        #>
             $previousLEDData  = $LEDData.Clone() 
 		    # Send LED value
 		    If($Port.IsOpen){ 
@@ -116,7 +117,7 @@ do{
             Else{
 			    Write-Verbose 'COM Port is no longer open.'
 		    }
-        }
+       # }
 	}
 	Else{
 		Write-Verbose 'Unable to retrieve sensor informationl. Is HardwareMonitor running?'
